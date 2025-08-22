@@ -17,12 +17,12 @@ export default function Home() {
             Scopri tutte le funzionalità disponibili.
           </p>
                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-             <Link href={route('dashboard')}>
+             <Link href="/dashboard">
                <Button size="lg">
                  Vai alla Dashboard
                </Button>
              </Link>
-             <Link href={route('login')}>
+             <Link href="/login">
                <Button variant="outline" size="lg">
                  Accedi
                </Button>
@@ -85,10 +85,10 @@ export default function Home() {
               <p className="text-lg text-gray-600 mb-6">
                 Unisciti a noi e scopri tutte le funzionalità disponibili.
               </p>
-                             <Link href={route('register')}>
+                                                          <Link href="/register">
                  <Button size="lg">
                    Inizia Ora
-                 </Button>
+               </Button>
                </Link>
             </CardBody>
           </Card>

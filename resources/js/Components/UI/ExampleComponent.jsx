@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { cn } from '../../utils';
 
 /**
@@ -164,18 +165,18 @@ ExampleComponent.displayName = 'ExampleComponent';
 
 // PropTypes per validazione (opzionale, ma raccomandato)
 ExampleComponent.propTypes = {
-  children: React.PropTypes.node,
-  variant: React.PropTypes.oneOf(['default', 'primary', 'success', 'warning', 'danger']),
-  size: React.PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
-  className: React.PropTypes.string,
-  fullWidth: React.PropTypes.bool,
-  disabled: React.PropTypes.bool,
-  loading: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
-  onMouseEnter: React.PropTypes.func,
-  onMouseLeave: React.PropTypes.func,
-  'aria-label': React.PropTypes.string,
-  'aria-describedby': React.PropTypes.string,
+  children: PropTypes.node,
+  variant: PropTypes.oneOf(['default', 'primary', 'success', 'warning', 'danger']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  className: PropTypes.string,
+  fullWidth: PropTypes.bool,
+  disabled: PropTypes.bool,
+  loading: PropTypes.bool,
+  onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  'aria-label': PropTypes.string,
+  'aria-describedby': PropTypes.string,
 };
 
 // Default props
