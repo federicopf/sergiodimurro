@@ -38,7 +38,7 @@ const Register = () => {
     }
     
     setValidationErrors({});
-    post(route('register.post'));
+    post('/register');
   };
 
   return (
@@ -126,7 +126,7 @@ const Register = () => {
           <p className="text-sm text-gray-600">
             Hai già un account?{' '}
             <Link
-              href={route('login')}
+              href="/login"
               className="font-medium text-blue-600 hover:text-blue-500"
             >
               Accedi qui

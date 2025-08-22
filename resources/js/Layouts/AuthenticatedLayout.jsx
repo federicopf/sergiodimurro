@@ -97,7 +97,7 @@ const AuthenticatedLayout = ({ children, header }) => {
               <div className="flex items-center space-x-3">
                 <span className="text-sm text-gray-700">{auth.user?.name}</span>
                                  <Link
-                   href={route('logout')}
+                   href="/logout"
                    method="post"
                    as="button"
                    className="text-sm text-gray-500 hover:text-gray-700"

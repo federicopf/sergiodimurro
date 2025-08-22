@@ -39,7 +39,7 @@ class AuthController extends Controller
             ]
         ]);
 
-        return redirect()->route('dashboard')
+        return redirect('/dashboard')
             ->with('success', 'Login effettuato con successo!');
     }
 
@@ -59,7 +59,7 @@ class AuthController extends Controller
             ]
         ]);
 
-        return redirect()->route('dashboard')
+        return redirect('/dashboard')
             ->with('success', 'Registrazione completata con successo!');
     }
 
@@ -71,7 +71,7 @@ class AuthController extends Controller
         session()->forget('auth.user');
         session()->flush();
 
-        return redirect()->route('home')
+        return redirect('/')
             ->with('success', 'Logout effettuato con successo!');
     }
 }

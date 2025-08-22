@@ -12,13 +12,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            if (!session('auth.user')) {
-                return redirect()->route('login')
-                    ->with('error', 'Devi effettuare il login per accedere a questa pagina.');
-            }
-            return $next($request);
-        });
+        // Verifica autenticazione in ogni metodo
     }
 
     /**
@@ -26,6 +20,11 @@ class UserController extends Controller
      */
     public function profile()
     {
+        if (!session('auth.user')) {
+            return redirect('/login')
+                ->with('error', 'Devi effettuare il login per accedere a questa pagina.');
+        }
+        
         $user = session('auth.user');
         
         return Inertia::render('Profile', [
@@ -38,6 +37,11 @@ class UserController extends Controller
      */
     public function updateProfile(Request $request)
     {
+        if (!session('auth.user')) {
+            return redirect('/login')
+                ->with('error', 'Devi effettuare il login per accedere a questa pagina.');
+        }
+        
         // In futuro qui aggiungeremo la validazione vera
         $user = session('auth.user');
         
@@ -47,7 +51,7 @@ class UserController extends Controller
         
         session(['auth.user' => $user]);
         
-        return redirect()->route('profile')
+        return redirect('/profile')
             ->with('success', 'Profilo aggiornato con successo!');
     }
 
@@ -56,6 +60,11 @@ class UserController extends Controller
      */
     public function settings()
     {
+        if (!session('auth.user')) {
+            return redirect('/login')
+                ->with('error', 'Devi effettuare il login per accedere a questa pagina.');
+        }
+        
         return Inertia::render('Settings');
     }
 
@@ -64,8 +73,13 @@ class UserController extends Controller
      */
     public function updateSettings(Request $request)
     {
+        if (!session('auth.user')) {
+            return redirect('/login')
+                ->with('error', 'Devi effettuare il login per accedere a questa pagina.');
+        }
+        
         // In futuro qui aggiungeremo la logica per le impostazioni
-        return redirect()->route('settings')
+        return redirect('/settings')
             ->with('success', 'Impostazioni aggiornate con successo!');
     }
 }

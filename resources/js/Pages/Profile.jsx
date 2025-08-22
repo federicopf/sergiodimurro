@@ -11,7 +11,7 @@ const Profile = ({ user }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    post(route('profile.update'));
+    post('/profile');
   };
 
   return (

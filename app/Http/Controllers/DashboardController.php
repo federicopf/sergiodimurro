@@ -12,13 +12,7 @@ class DashboardController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            if (!session('auth.user')) {
-                return redirect()->route('login')
-                    ->with('error', 'Devi effettuare il login per accedere a questa pagina.');
-            }
-            return $next($request);
-        });
+        // Verifica autenticazione in ogni metodo
     }
 
     /**
@@ -26,6 +20,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        if (!session('auth.user')) {
+            return redirect('/login')
+                ->with('error', 'Devi effettuare il login per accedere a questa pagina.');
+        }
+        
         return Inertia::render('Dashboard');
     }
 
@@ -34,6 +33,11 @@ class DashboardController extends Controller
      */
     public function componentsShowcase()
     {
+        if (!session('auth.user')) {
+            return redirect('/login')
+                ->with('error', 'Devi effettuare il login per accedere a questa pagina.');
+        }
+        
         return Inertia::render('ComponentsShowcase');
     }
 }

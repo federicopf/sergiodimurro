@@ -17,7 +17,7 @@ const Settings = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    post(route('settings.update'), {
+    post('/settings', {
       data: settings
     });
   };

@@ -29,7 +29,7 @@ const Login = () => {
     }
     
     setValidationErrors({});
-    post(route('login.post'));
+    post('/login');
   };
 
   return (
@@ -109,7 +109,7 @@ const Login = () => {
           <p className="text-sm text-gray-600">
             Non hai un account?{' '}
             <Link
-              href={route('register')}
+              href="/register"
               className="font-medium text-blue-600 hover:text-blue-500"
             >
               Registrati qui
