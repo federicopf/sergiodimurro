@@ -18,10 +18,10 @@ class AuthController extends Controller
     /**
      * Mostra la pagina di registrazione
      */
-    public function showRegister()
-    {
-        return Inertia::render('Register');
-    }
+    // public function showRegister()
+    // {
+    //     return Inertia::render('Register');
+    // }
 
     /**
      * Gestisce il login (simulato senza verifiche)
@@ -46,22 +46,22 @@ class AuthController extends Controller
     /**
      * Gestisce la registrazione (simulata senza verifiche)
      */
-    public function register(Request $request)
-    {
-        // In futuro qui aggiungeremo la validazione vera
-        // Per ora simuliamo la registrazione
-        session([
-            'auth.user' => [
-                'id' => 1,
-                'name' => $request->name ?? 'Nuovo Utente',
-                'email' => $request->email ?? 'nuovo@example.com',
-                'role' => 'user'
-            ]
-        ]);
+    // public function register(Request $request)
+    // {
+    //     // In futuro qui aggiungeremo la validazione vera
+    //     // Per ora simuliamo la registrazione
+    //     session([
+    //         'auth.user' => [
+    //             'id' => 1,
+    //             'name' => $request->name ?? 'Nuovo Utente',
+    //             'email' => $request->email ?? 'nuovo@example.com',
+    //             'role' => 'user'
+    //         ]
+    //     ]);
 
-        return redirect('/dashboard')
-            ->with('success', 'Registrazione completata con successo!');
-    }
+    //     return redirect('/dashboard')
+    //         ->with('success', 'Registrazione completata con successo!');
+    // }
 
     /**
      * Gestisce il logout

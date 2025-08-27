@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 // Rotte pubbliche
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+// Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 
 // Rotte di autenticazione
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
