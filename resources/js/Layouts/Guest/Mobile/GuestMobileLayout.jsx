@@ -1,5 +1,5 @@
-import Footer from "../Components/Guest/Shared/Footer";
-import Topbar from "../Components/Guest/Mobile/Topbar";
+import Footer from "../../../Components/Guest/Shared/Footer";
+import Topbar from "../../../Components/Guest/Mobile/Topbar";
 
 const GuestMobileLayout = ({ children }) => {
   return (

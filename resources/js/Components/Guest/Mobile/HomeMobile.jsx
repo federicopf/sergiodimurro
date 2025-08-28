@@ -1,4 +1,4 @@
-import GuestMobileLayout from "../../../Layouts/GuestMobileLayout";
+import GuestMobileLayout from "../../../Layouts/Guest/Mobile/GuestMobileLayout";
 import HomeContent from "../Shared/HomeContent";
 
 export default function HomeMobile() {

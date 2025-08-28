@@ -1,5 +1,5 @@
-import Footer from "../Components/Guest/Shared/Footer";
-import Sidebar from "../Components/Guest/Desktop/Sidebar";
+import Footer from "../../../Components/Guest/Shared/Footer";
+import Sidebar from "../../../Components/Guest/Desktop/Sidebar";
 
 const GuestDesktopLayout = ({ children }) => {
   return (
