@@ -1,22 +1,39 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export function useDeviceType() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const checkDeviceType = useCallback(() => {
+    const mobile = window.innerWidth < 768;
+    setIsMobile(mobile);
+    setIsLoading(false);
+  }, []);
 
   useEffect(() => {
-    const checkDeviceType = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
     // Controlla all'avvio
     checkDeviceType();
 
+    // Debounce per il resize
+    let timeoutId;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkDeviceType, 100);
+    };
+
     // Aggiungi listener per il resize
-    window.addEventListener('resize', checkDeviceType);
+    window.addEventListener('resize', handleResize);
 
     // Cleanup
-    return () => window.removeEventListener('resize', checkDeviceType);
-  }, []);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, [checkDeviceType]);
 
-  return { isMobile, isDesktop: !isMobile };
+  return { 
+    isMobile, 
+    isDesktop: !isMobile, 
+    isLoading 
+  };
 }

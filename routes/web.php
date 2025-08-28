@@ -5,10 +5,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\InertiaController;
+use App\Http\Controllers\Guest\HomeController as GuestHomeController;
+use App\Http\Controllers\AboutController;
 
 // Rotte pubbliche
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [GuestHomeController::class, 'index'])->name('home');
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 // Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 
@@ -26,9 +28,3 @@ Route::get('/profile', [UserController::class, 'profile'])->name('profile');
 Route::post('/profile', [UserController::class, 'updateProfile'])->name('profile.update');
 Route::get('/settings', [UserController::class, 'settings'])->name('settings');
 Route::post('/settings', [UserController::class, 'updateSettings'])->name('settings.update');
-
-Route::get('/', function () {
-    return inertia('Home');
-});
-
-Route::get('/sqlite-demo', [InertiaController::class, 'index']);
