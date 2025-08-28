@@ -1,9 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Guest\HomeController;
-use App\Http\Controllers\Guest\AboutController;
 
-// Rotte pubbliche
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::prefix('admin')
+    ->as('admin.')
+    ->middleware(['auth', 'admin'])
+    ->group(base_path('routes/admin.php'));
+
+Route::prefix('/')
+    ->as('guest.')
+    ->group(base_path('routes/guest.php'));
