@@ -3,36 +3,28 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Services\UserService;
-use App\Services\PostService;
+use App\Services\PhotoService;
 
 class InertiaController extends Controller
 {
-    public function __construct(
-        private UserService $userService,
-        private PostService $postService
-    ) {}
+    public function __construct(private PhotoService $photoService) {}
 
     public function index()
     {
         try {
-            $users = $this->userService->getAllUsers();
-            $posts = $this->postService->getAllPosts();
+            $photos = $this->photoService->getAllPhotos();
             
             return Inertia::render('SqliteDemo', [
-                'users' => $users,
-                'posts' => $posts,
+                'photos' => $photos,
                 'stats' => [
-                    'totalUsers' => $this->userService->countUsers(),
-                    'totalPosts' => $this->postService->countPosts()
+                    'totalPhotos' => $this->photoService->countPhotos()
                 ]
             ]);
         } catch (\Exception $e) {
             return Inertia::render('SqliteDemo', [
                 'error' => $e->getMessage(),
-                'users' => [],
-                'posts' => [],
-                'stats' => ['totalUsers' => 0, 'totalPosts' => 0]
+                'photos' => [],
+                'stats' => ['totalPhotos' => 0]
             ]);
         }
     }

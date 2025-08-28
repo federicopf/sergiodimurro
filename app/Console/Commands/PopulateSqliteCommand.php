@@ -3,8 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Repositories\UserRepository;
-use App\Repositories\PostRepository;
+use App\Repositories\PhotoRepository;
 
 class PopulateSqliteCommand extends Command
 {
@@ -13,66 +12,80 @@ class PopulateSqliteCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'sqlite:populate {--count=5 : Number of users to create}';
+    protected $signature = 'sqlite:populate {--count=5 : Number of photos to create}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Popola il database SQLite con dati di esempio';
+    protected $description = 'Popola il database SQLite con foto di esempio';
 
     /**
      * Execute the console command.
      */
-    public function handle(UserRepository $userRepository, PostRepository $postRepository): int
+    public function handle(PhotoRepository $photoRepository): int
     {
-        $this->info('🚀 Inizializzazione database SQLite...');
+        $this->info('🚀 Inizializzazione database SQLite per foto...');
 
         try {
             $count = (int) $this->option('count');
             
-            // Crea utenti di esempio
-            $this->info("📝 Creazione di {$count} utenti...");
-            $users = [];
+            // Crea foto di esempio
+            $this->info("📸 Creazione di {$count} foto di esempio...");
             
-            for ($i = 1; $i <= $count; $i++) {
-                $user = $userRepository->create([
-                    'name' => "Utente {$i}",
-                    'email' => "utente{$i}@example.com"
-                ]);
-                $users[] = $user;
-                $this->line("✅ Creato utente: {$user['name']} ({$user['email']})");
-            }
-
-            // Crea post di esempio
-            $this->info('📝 Creazione post di esempio...');
-            $postTitles = [
-                'Benvenuto nel nostro sito',
-                'Come utilizzare i nostri servizi',
-                'Nuove funzionalità disponibili',
-                'Guida completa per iniziare',
-                'Domande frequenti e risposte'
+            $photoData = [
+                [
+                    'title' => 'Paesaggio montano',
+                    'description' => 'Bellissima vista delle montagne al tramonto',
+                    'filename' => 'landscape_mountain.jpg',
+                    'file_path' => '/storage/photos/landscape_mountain.jpg',
+                    'file_size' => 2048576,
+                    'mime_type' => 'image/jpeg'
+                ],
+                [
+                    'title' => 'Ritratto urbano',
+                    'description' => 'Architettura moderna in città',
+                    'filename' => 'urban_portrait.jpg',
+                    'file_path' => '/storage/photos/urban_portrait.jpg',
+                    'file_size' => 1536000,
+                    'mime_type' => 'image/jpeg'
+                ],
+                [
+                    'title' => 'Natura selvaggia',
+                    'description' => 'Foresta incontaminata con cascate',
+                    'filename' => 'wild_nature.png',
+                    'file_path' => '/storage/photos/wild_nature.png',
+                    'file_size' => 3072000,
+                    'mime_type' => 'image/png'
+                ],
+                [
+                    'title' => 'Street photography',
+                    'description' => 'Vita quotidiana nelle strade della città',
+                    'filename' => 'street_life.jpg',
+                    'file_path' => '/storage/photos/street_life.jpg',
+                    'file_size' => 2560000,
+                    'mime_type' => 'image/jpeg'
+                ],
+                [
+                    'title' => 'Astronomia',
+                    'description' => 'Stelle e galassie nel cielo notturno',
+                    'filename' => 'astronomy.jpg',
+                    'file_path' => '/storage/photos/astronomy.jpg',
+                    'file_size' => 4096000,
+                    'mime_type' => 'image/jpeg'
+                ]
             ];
 
-            foreach ($users as $index => $user) {
-                $title = $postTitles[$index % count($postTitles)];
-                $content = "Questo è un post di esempio creato da {$user['name']}. " . 
-                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " .
-                           "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-                
-                $post = $postRepository->create([
-                    'title' => $title,
-                    'content' => $content,
-                    'user_id' => $user['id']
-                ]);
-                $this->line("✅ Creato post: {$post['title']} di {$user['name']}");
+            for ($i = 0; $i < $count; $i++) {
+                $photoIndex = $i % count($photoData);
+                $photo = $photoRepository->create($photoData[$photoIndex]);
+                $this->line("✅ Creata foto: {$photo['title']} ({$photo['filename']})");
             }
 
             $this->info('🎉 Database popolato con successo!');
             $this->info("📊 Statistiche:");
-            $this->info("   - Utenti: " . $userRepository->count());
-            $this->info("   - Post: " . $postRepository->count());
+            $this->info("   - Foto: " . $photoRepository->count());
 
             return Command::SUCCESS;
 

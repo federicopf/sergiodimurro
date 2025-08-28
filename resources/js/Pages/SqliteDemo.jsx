@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import AdminDesktopLayout from '../Layouts/Guest/Desktop/GuestDesktopLayout';
 
-export default function SqliteDemo({ users, posts, stats, error }) {
-  const [activeTab, setActiveTab] = useState('users');
+export default function SqliteDemo({ photos, stats, error }) {
+  const [activeTab, setActiveTab] = useState('photos');
 
   if (error) {
     return (
@@ -20,73 +20,43 @@ export default function SqliteDemo({ users, posts, stats, error }) {
   return (
     <AdminDesktopLayout>
       <div className="container mx-auto px-6 py-12">
-        <h1 className="text-3xl font-bold mb-8">Demo SQLite</h1>
+        <h1 className="text-3xl font-bold mb-8">Demo SQLite - Foto</h1>
         
         {/* Stats */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          <div className="bg-blue-50 p-4 rounded-lg">
-            <h3 className="text-blue-800 font-semibold">Utenti</h3>
-            <p className="text-2xl font-bold text-blue-600">{stats.totalUsers}</p>
-          </div>
-          <div className="bg-green-50 p-4 rounded-lg">
-            <h3 className="text-green-800 font-semibold">Post</h3>
-            <p className="text-2xl font-bold text-green-600">{stats.totalPosts}</p>
-          </div>
-        </div>
-
-        {/* Tabs */}
-        <div className="flex space-x-1 mb-6">
-          <button
-            onClick={() => setActiveTab('users')}
-            className={`px-4 py-2 rounded-md ${
-              activeTab === 'users' 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-          >
-            Utenti ({users.length})
-          </button>
-          <button
-            onClick={() => setActiveTab('posts')}
-            className={`px-4 py-2 rounded-md ${
-              activeTab === 'posts' 
-                ? 'bg-blue-600 text-white' 
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-          >
-            Post ({posts.length})
-          </button>
+        <div className="bg-blue-50 p-6 rounded-lg mb-8">
+          <h3 className="text-blue-800 font-semibold text-lg mb-2">Statistiche</h3>
+          <p className="text-2xl font-bold text-blue-600">{stats.totalPhotos} foto totali</p>
         </div>
 
         {/* Content */}
-        {activeTab === 'users' && (
-          <div className="space-y-4">
-            {users.map(user => (
-              <div key={user.id} className="bg-white p-4 rounded-lg shadow border">
-                <h3 className="font-semibold text-lg">{user.name}</h3>
-                <p className="text-gray-600">{user.email}</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Creato: {new Date(user.created_at).toLocaleDateString('it-IT')}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {activeTab === 'posts' && (
-          <div className="space-y-4">
-            {posts.map(post => (
-              <div key={post.id} className="bg-white p-4 rounded-lg shadow border">
-                <h3 className="font-semibold text-lg">{post.title}</h3>
-                <p className="text-gray-600 mt-2">{post.content}</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Autore: {post.author_name || 'Sconosciuto'} | 
-                  Data: {new Date(post.created_at).toLocaleDateString('it-IT')}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
+        <div className="space-y-6">
+          {photos.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-gray-500 text-lg">Nessuna foto trovata</p>
+              <p className="text-gray-400 mt-2">Usa il comando <code className="bg-gray-100 px-2 py-1 rounded">php artisan sqlite:populate</code> per creare foto di esempio</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {photos.map(photo => (
+                <div key={photo.id} className="bg-white rounded-lg shadow-md overflow-hidden border">
+                  <div className="p-4">
+                    <h3 className="font-semibold text-lg text-gray-800 mb-2">{photo.title}</h3>
+                    {photo.description && (
+                      <p className="text-gray-600 text-sm mb-3">{photo.description}</p>
+                    )}
+                    <div className="space-y-2 text-sm text-gray-500">
+                      <p><span className="font-medium">File:</span> {photo.filename}</p>
+                      <p><span className="font-medium">Tipo:</span> {photo.mime_type}</p>
+                      <p><span className="font-medium">Dimensione:</span> {(photo.file_size / 1024 / 1024).toFixed(2)} MB</p>
+                      <p><span className="font-medium">Percorso:</span> {photo.file_path}</p>
+                      <p><span className="font-medium">Data:</span> {new Date(photo.created_at).toLocaleDateString('it-IT')}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </AdminDesktopLayout>
   );
