@@ -1,16 +1,17 @@
 import { Link } from '@inertiajs/react';
+import { route } from '../../../helpers';
 
 const Sidebar = () => {
   const navigation = [
-    { name: 'Home', href: '/', icon: 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z' },
-    { name: 'Chi Siamo', href: '/about', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
+    { name: 'Home', href: route('guest.home'), icon: 'M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z' },
+    { name: 'Chi Siamo', href: route('guest.about'), icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
   ];
 
   return (
     <aside className="w-64 bg-white shadow-lg border-r border-gray-200 p-6">
       {/* Logo */}
       <div className="mb-8">
-        <Link href="/" className="text-xl font-semibold text-gray-800 tracking-wide hover:text-gray-600 transition-colors">
+        <Link href={route('guest.home')} className="text-xl font-semibold text-gray-800 tracking-wide hover:text-gray-600 transition-colors">
           Sergio Di Murro
         </Link>
       </div>

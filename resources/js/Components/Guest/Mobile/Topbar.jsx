@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from '@inertiajs/react';
+import { route } from '../../../helpers';
 
 const Topbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -9,8 +10,8 @@ const Topbar = () => {
   };
 
   const navigation = [
-    { name: 'Home', href: '/', current: false },
-    { name: 'Chi Siamo', href: '/about', current: false },
+    { name: 'Home', href: route('guest.home'), current: false },
+    { name: 'Chi Siamo', href: route('guest.about'), current: false },
   ];
 
   return (
@@ -19,7 +20,7 @@ const Topbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-semibold text-gray-800 tracking-wide hover:text-gray-600 transition-colors">
+            <Link href={route('guest.home')} className="text-xl font-semibold text-gray-800 tracking-wide hover:text-gray-600 transition-colors">
               Sergio Di Murro
             </Link>
           </div>
