@@ -1,6 +1,6 @@
 import { useDeviceType } from "../../Hooks/useDeviceType";
-import HomeMobile from "../../Components/Guest/Mobile/HomeMobile";
-import HomeDesktop from "../../Components/Guest/Desktop/HomeDesktop";
+import HomeMobile from "../../Components/Guest/Mobile/ContentWrappers/HomeContentWrapper";
+import HomeDesktop from "../../Components/Guest/Desktop/ContentWrappers/HomeContentWrapper";
 
 export default function Home({ data }) {
   const { isMobile } = useDeviceType();

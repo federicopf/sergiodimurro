@@ -1,5 +1,5 @@
-import GuestDesktopLayout from "../../../Layouts/Guest/Desktop/GuestDesktopLayout";
-import AboutContent from "../Shared/AboutContent";
+import GuestDesktopLayout from "../../../../Layouts/Guest/Desktop/GuestDesktopLayout";
+import AboutContent from "../../Shared/Contents/AboutContent";
 
 export default function AboutDesktop({ data }) {
   return (
