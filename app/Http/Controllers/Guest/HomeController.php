@@ -16,16 +16,21 @@ class HomeController extends Controller
             $photos = $this->photoService->getAllPhotos();
             
             return Inertia::render('Guest/Home', [
-                'photos' => $photos,
-                'stats' => [
-                    'totalPhotos' => $this->photoService->countPhotos()
+                'data' => [
+                    'photos' => $photos,
+                    'stats' => [
+                        'totalPhotos' => $this->photoService->countPhotos()
+                    ],
+                    'error' => null
                 ]
             ]);
         } catch (\Exception $e) {
             return Inertia::render('Guest/Home', [
-                'error' => $e->getMessage(),
-                'photos' => [],
-                'stats' => ['totalPhotos' => 0]
+                'data' => [
+                    'photos' => [],
+                    'stats' => ['totalPhotos' => 0],
+                    'error' => $e->getMessage()
+                ]
             ]);
         }
     }

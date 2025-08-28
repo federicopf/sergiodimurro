@@ -1,10 +1,10 @@
 import GuestDesktopLayout from "../../../Layouts/Guest/Desktop/GuestDesktopLayout";
 import AboutContent from "../Shared/AboutContent";
 
-export default function AboutDesktop({ contact }) {
+export default function AboutDesktop({ data }) {
   return (
     <GuestDesktopLayout>
-      <AboutContent contact={contact} />
+      <AboutContent data={data} />
     </GuestDesktopLayout>
   );
 }
