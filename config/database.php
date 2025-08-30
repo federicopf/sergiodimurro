@@ -31,12 +31,6 @@ return [
 
     'connections' => [
 
-        'fake' => [
-            'driver' => 'sqlite',
-            'database' => database_path('none.sqlite'),
-            'prefix' => '',
-        ],
-
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DB_URL'),
